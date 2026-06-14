@@ -1,0 +1,7 @@
+/.docdex/
+/.docdex-state/
+docs/planning/
+
+# Local scientific paper downloads; keep the bibliography only.
+/papers/*.pdf
+/papers/**/*.pdf
