@@ -12,6 +12,7 @@ This file records the scientific papers that were scanned or collected for this 
 - Missing local PDFs for listed rows: 0
 - Duplicate source links: 0
 - arXiv ID/file mismatches: 0
+- External arXiv source links reachable on 2026-06-14: 203/203
 - PDF files tracked by Git now: 0
 - PDF-like objects found in current Git history: 0
 
