@@ -1,0 +1,43 @@
+{
+  "agent_id": "stub",
+  "concept": {
+    "concept_name": "zoroto screening field",
+    "concept_text": "Assume a temporary pre-recombination screening field that lowers the sound horizon while leaving late-time ladder calibration explicit.",
+    "source_kind": "mock_corpus_mutation",
+    "source_ref": "paper-mock-ede",
+    "wildness_level": "W3"
+  },
+  "decision": {
+    "decision": "branch",
+    "next_step": "restart_from_checkpoint",
+    "rationale": "Stub checks produced a constrained failure record and a branchable assumption change.",
+    "uncertainty": "medium"
+  },
+  "hypothesis": {
+    "title": "Zoroto screening field reduces early sound horizon",
+    "falsification_tests": [
+      "Reject if Planck-like CMB summary worsens beyond L2 threshold.",
+      "Reject if BAO and local H0 prefer mutually incompatible H0 values.",
+      "Reject if S8 shift exceeds screening guardrail."
+    ],
+    "parameter_budget": 3,
+    "operators": [
+      "paper_mutation",
+      "failure_inversion",
+      "assumption_addition"
+    ],
+    "assumption_diff": {
+      "kept": [
+        "general_relativity",
+        "statistical_isotropy"
+      ],
+      "removed": [],
+      "added": [
+        "zoroto_screening_field"
+      ],
+      "modified": [
+        "pre_recombination_expansion_history"
+      ]
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "source": "mock",
+  "dataset_ids": [
+    "planck_lite",
+    "desi_bao",
+    "pantheon_plus",
+    "sh0es",
+    "bbn"
+  ],
+  "papers": [
+    {
+      "paper_id": "paper-mock-ede",
+      "title": "Mock early dark energy no-go replay",
+      "category": "early_universe",
+      "datasets": [
+        "planck_lite",
+        "desi_bao",
+        "sh0es"
+      ],
+      "failure_lessons": [
+        "H0 relief without consistent BAO/CMB fit is not enough.",
+        "Early-universe changes need S8 and sound-horizon guardrails."
+      ]
+    },
+    {
+      "paper_id": "paper-mock-ladder",
+      "title": "Mock distance ladder calibration constraint",
+      "category": "local_systematics",
+      "datasets": [
+        "pantheon_plus",
+        "sh0es"
+      ],
+      "failure_lessons": [
+        "Local calibration shifts must stay screening-only until full ladder replay exists."
+      ]
+    }
+  ],
+  "failure_memory": [
+    {
+      "paper_id": "paper-mock-ede",
+      "constraint_category": "early_universe",
+      "failure_kind": "known_rejected_model",
+      "summary": "Do not promote H0-only relief when BAO and CMB summaries disagree."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+.git/
+.docdex/
+.docdex-state/
+.hubble_tension_state/
+.hubble_tension_solvers/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.venv/
+build/
+dist/
+logs/
+experiments/
+papers/
+**/*.pdf
+docs/planning/

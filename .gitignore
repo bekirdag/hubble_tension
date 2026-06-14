@@ -1,6 +1,26 @@
 /.docdex/
+/.docdex/*
+!/.docdex/
+!/.docdex/run-tests.json
 /.docdex-state/
+/.hubble_tension_state/
+/.hubble_tension_solvers/
 docs/planning/
+
+# Python and local tooling
+/.venv/
+/.pytest_cache/
+/.ruff_cache/
+/.mypy_cache/
+/build/
+/dist/
+*.egg-info/
+__pycache__/
+*.py[cod]
+
+# Local generated lab/runtime artifacts
+/experiments/
+/logs/
 
 # Local scientific paper downloads; keep the bibliography only.
 /papers/*.pdf

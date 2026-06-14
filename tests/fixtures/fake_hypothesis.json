@@ -1,0 +1,10 @@
+{
+  "hypothesis_id": "hyp-000001",
+  "concept_name": "phase0-fixture",
+  "assumption_diff": {
+    "kept": ["Lambda-CDM baseline comparison"],
+    "removed": [],
+    "added": ["fixture-only perturbation"],
+    "modified": []
+  }
+}

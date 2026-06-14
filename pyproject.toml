@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling>=1.26,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hubble-tension-lab"
+version = "0.1.0"
+description = "Local-first autonomous AI laboratory scaffold for Hubble tension research."
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = { text = "MIT" }
+authors = [{ name = "Hubble Tension Lab" }]
+dependencies = [
+  "pydantic>=2.11,<3",
+  "PyYAML>=6.0.2,<7",
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.17,<2",
+  "pytest>=8.4,<9",
+  "ruff>=0.12,<1",
+  "types-PyYAML>=6.0.12,<7",
+]
+
+[project.scripts]
+hubble-tension = "hubble_tension.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hubble_tension"]
+
+[tool.hubble_tension]
+ci_python_version = "3.13"
+phase = "14"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+packages = ["hubble_tension"]

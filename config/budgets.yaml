@@ -1,0 +1,23 @@
+version: 1
+cloud_spend_usd_per_day: 0
+generated_tokens:
+  per_hypothesis: 20000
+  per_attempt: 200000
+  hard_stop_multiplier: 2
+concurrency:
+  active_lab_runs: 1
+  generated_code_sandboxes: 1
+  solver_jobs: 1
+  lab_head_requests: 1
+hardware:
+  max_sustained_cpu_percent: 80
+  min_free_ram_gb: 4
+  max_lab_state_storage_gb: 20
+wall_time:
+  screening_attempt_minutes: 45
+  promising_candidate_validation_hours: 2
+  l7_posterior_attempt_hours: 12
+  l7_total_candidate_hours: 48
+status:
+  hard_generation_stop: generation_budget_failed
+  l7_timeout: inconclusive_posterior

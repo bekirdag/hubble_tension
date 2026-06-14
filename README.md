@@ -19,7 +19,9 @@ The intended user-facing launcher is:
 ./hubble_tension.sh
 ```
 
-The launcher should start or resume the lab with no prompts and no required arguments. It should stream concise live logs, persist state continuously, checkpoint after interruptions, and keep running until stopped, budget-paused, or until an internally stable candidate survives all configured validation and adversarial checks.
+The launcher starts or resumes the lab with no prompts and no required arguments. It prefers the repo-local `.venv/bin/python` when `PYTHON` is not set, then falls back to supported system Python versions. This keeps a direct shell run from accidentally selecting a Python environment that is missing runtime dependencies such as Pydantic.
+
+It streams concise live logs, persists state continuously, checkpoints after interruptions, and keeps running until stopped, budget-paused, or until an internally stable candidate survives all configured validation and adversarial checks.
 
 Even then, the strongest internal status is `stable_internal_candidate`. Reports and terminal banners must say that a candidate passed configured gates and is not a scientific claim.
 
@@ -67,7 +69,7 @@ The software should:
 
 ## Build Plan Summary
 
-The current build plan breaks implementation into 14 phases:
+The current build plan breaks implementation into 15 phases:
 
 | Phase | Name | Main Outcome |
 | ---: | --- | --- |
@@ -85,6 +87,7 @@ The current build plan breaks implementation into 14 phases:
 | 11 | Independent Replication | L8 independent implementation path and compressed-observable checks. |
 | 12 | Adversarial Validation and Candidate Registry | Registered refutation checks and truthful stable-candidate banner rendering. |
 | 13 | Continuous Lab Operations | External-status transitions, digests, maintenance, and optional scale-out profile. |
+| 14 | Release Readiness and Closure | Automated readiness manifest, validation ledger, and no-claim release gate. |
 
 ## Scientific Categories
 
@@ -103,19 +106,34 @@ The current corpus is organized into these categories:
 
 ## Current Status
 
-The repository currently contains the scientific corpus metadata, category map, SDS, and phased build plan. The autonomous lab software has not been implemented yet.
+The implementation is complete through Phase 14 of the build plan as an executable local scaffold:
 
-The first implementation sprint should create the runtime shell:
+- Phase 0 created the Python package skeleton, config, CI, policy contracts, schemas, and immutable science rules.
+- Phase 1 added `./hubble_tension.sh`, no-prompt startup, runtime supervisor, live logs, locks, STOP handling, checkpointing, resume behavior, and budget states.
+- Phase 2 added the SQLite state store, migrations, lab notes, event log, checkpoints, candidate/report records, and required agent/prompt provenance.
+- Phase 3 added `hubble_tension.corpus.importer`, which imports all 203 scanned papers, preserves arXiv URLs and local ignored PDF paths, resolves stable paper IDs, validates the 8 category assignments, seeds dataset leads, and writes the corpus into the state store.
+- Phase 4 added `hubble_tension.corpus.study`, which builds strict JSON paper-study records for all 203 papers, records method/dataset/prior/result/failure fields, creates reusable failure memories, answers which papers constrain a concept category, and encodes the SDS MVP 3 benchmark replay suite by paper ID.
+- Phase 5 added a deterministic `StubLabHead` path and mock corpus mode so one launcher run can observe, imagine, hypothesize, formalize, implement, test, tune, branch/refute, remember, decide, and checkpoint without `mcoda` or solvers.
+- Phase 6 added the concept forge: paper mutations, failure inversions, assumption-removal tracks, seeded random concepts, prior-art/similarity checks, and allowlisted fiction-motif inspiration with permanent disable policy after failed A/B cycles.
+- Phase 7 added formula building, static math criticism, generated model rendering under active run paths, and static sandbox isolation checks.
+- Phase 8 added fixture likelihood loaders, richer typed metric packets, L0-L5 summary-screen reality checks, covariance gate blockers, and disguised Lambda-CDM non-promotion.
+- Phase 9 added bounded tuning, assumption-aware branching, abandonment lessons, branch-priority scoring with novelty as tie-breaker only, W0-W5 abandonment thresholds, and generator quarantine.
+- Phase 10 added the supported-solver scaffold: commit-pinned solver config, dry-run and container build automation for CLASS-family and HyRec paths, candidate-to-solver adapters, Lambda-CDM and EDE replay fixtures, posterior timeout/failure statuses, and lazy runtime solver probes that surface `bootstrap_solver_unavailable`.
+- Phase 11 added independent replication scaffolding: L8 queue records, separate replication implementation metadata, deterministic automated reviewer routing, CMB compressed-observable checks, recombination fixture checks, replication reports, and policy blocking for background-only or failed replication scopes.
+- Phase 12 added adversarial validation scaffolding: immutable code-defined L9 checks, 12-attempt registered-gate accounting, budget-exhaustion handling as `inconclusive_adversarial_budget`, adversarial queue/report storage, a stable-candidate registry, and row-state-driven restart banners that cannot make unreplicated timeout rows look passed.
+- Phase 13 added continuous lab operations scaffolding: external-status monitor batching, cited transition proposals, automated lab-head accept/reject rules, explicit external rerun queueing, report search indexing, dataset-integration backlog records, periodic no-ack operator digests, storage compaction/stale-scratch/report-regeneration records, and an optional scale-out profile that cannot bypass sandbox, provenance, metric, replication, or adversarial gates.
+- Phase 14 added release-readiness closure: phase completion records for phases 0-14, validation evidence records, a persisted readiness report with provenance, and schema gates proving the scaffold remains automated-only, no-claim, and runnable through `./hubble_tension.sh`.
+- Startup readiness hardening fixed two practical launch paths: the autonomous scaffold starts by default unless `HT_LAB_DISABLE_AUTONOMOUS_LOOP=1` is set, and the root launcher now selects `.venv/bin/python` by default so `./hubble_tension.sh` works from a normal shell without manually exporting `PYTHON`.
 
-- Python package skeleton and CI.
-- `./hubble_tension.sh` launcher.
-- `config/lab_head.yaml` and `config/budgets.yaml`.
-- State store migrations for runtime, attempts, branches, tests, checkpoints, event logs, lab notes, candidates, prompt templates, and provenance.
-- Structured live logger.
-- Process lock, STOP-file handling, signal checkpointing, and resume behavior.
-- Policy module with `NOVELTY_GATING_WEIGHT = 0.0`.
-- Deterministic `StubLabHead` and mock corpus fixtures.
-- Tests for no-prompt startup, lock collision, resume, budget pause, stable-candidate restart, no-human-gate transitions, stub-agent CI, and mock-corpus mode.
+The configured autonomous loop starts by default when `./hubble_tension.sh` runs. A one-cycle dry-run of the stub path can be exercised locally with:
+
+```text
+HT_LAB_DRY_RUN=1 HT_LAB_HEAD_AGENT=stub HT_LAB_CORPUS_SOURCE=mock ./hubble_tension.sh
+```
+
+Set `HT_LAB_DISABLE_AUTONOMOUS_LOOP=1` only when you want a monitor-only startup smoke test.
+
+Latest startup validation covered the direct no-`PYTHON` launcher path, the stub autonomous loop, configured `codex55` agent discovery, clean STOP-file shutdown, Ruff, mypy, Docdex impact diagnostics, Docdex pre-commit, and 150 passing pytest tests.
 
 The first scientific target is not a novel solution. It is to replay Lambda-CDM, reproduce a published early-dark-energy failure mode, reject known bad model classes for literature-traceable reasons, and produce an automated report linking the rejection evidence to saved paper IDs and metric-packet fields.
 

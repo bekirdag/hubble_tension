@@ -1,0 +1,13 @@
+version: 1
+adapter: mcoda
+agent: codex55
+execution: local_only
+fallback:
+  allow_healthy_local_agents: true
+  prompt_on_unavailable: false
+  unavailable_status: lab_head_unavailable
+provenance:
+  require_agent_id: true
+  require_agent_version_hash: true
+  require_prompt_template_id: true
+  require_prompt_template_hash: true

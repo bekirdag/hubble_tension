@@ -1,0 +1,17 @@
+{
+  "candidate_id": "cand-000001",
+  "hypothesis_id": "hyp-000001",
+  "concept_name": "phase0-fixture",
+  "wildness_level": "W0",
+  "candidate_status": "stable_internal_candidate",
+  "replication_status": "passed_independent_path",
+  "replication_scope": "compressed_observable",
+  "adversarial_status": "passed_registered_gate",
+  "datasets_passed_json": {
+    "planck2018": true,
+    "bao": true
+  },
+  "report_path": "experiments/reports/candidate-phase0-fixture.md",
+  "metrics_json": {},
+  "novelty_profile": null
+}

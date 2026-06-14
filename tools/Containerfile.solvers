@@ -1,0 +1,35 @@
+FROM python:3.11-slim
+
+ARG DEBIAN_FRONTEND=noninteractive
+ARG HT_CLASS_REF
+ARG HT_CLASS_EDE_REF
+ARG HT_AXICLASS_REF
+ARG HT_HYREC2_REF
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        g++ \
+        gcc \
+        gfortran \
+        git \
+        libgomp1 \
+        libopenblas-dev \
+        make \
+        python3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspace/hubble_tension
+
+COPY pyproject.toml README.md ./
+COPY config ./config
+COPY src ./src
+COPY tools ./tools
+
+ENV HT_CLASS_REF=${HT_CLASS_REF}
+ENV HT_CLASS_EDE_REF=${HT_CLASS_EDE_REF}
+ENV HT_AXICLASS_REF=${HT_AXICLASS_REF}
+ENV HT_HYREC2_REF=${HT_HYREC2_REF}
+ENV HT_SOLVER_PREFIX=/opt/hubble_tension_solvers
+
+RUN bash tools/build_solvers.sh --prefix "$HT_SOLVER_PREFIX"

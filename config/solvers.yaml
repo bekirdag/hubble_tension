@@ -1,0 +1,50 @@
+version: 1
+container:
+  image: hubble-tension-solvers:phase10
+  runtime: podman
+  install_prefix: .hubble_tension_solvers
+toolchain:
+  compiler: gcc-13
+  openmp: libgomp
+  blas: openblas
+  python_bindings: true
+sources:
+  class:
+    family: lambda_cdm_and_stock_extensions
+    repo_url: https://github.com/lesgourg/class_public.git
+    pinned_ref_kind: commit
+    pinned_ref: e85808324f51fc694d12e3ed7439552a3c3f9540
+    pinned_ref_verified_at: "2026-06-14"
+    required_ref_env: HT_CLASS_REF
+    required_for_probe: true
+  class_ede:
+    family: early_dark_energy
+    repo_url: https://github.com/mwt5345/class_ede.git
+    pinned_ref_kind: commit
+    pinned_ref: 5a131c91d657dd9a7c6364cc45b038710f8d0d97
+    pinned_ref_verified_at: "2026-06-14"
+    required_ref_env: HT_CLASS_EDE_REF
+    required_for_probe: false
+  axiclass:
+    family: axion_like_early_universe
+    repo_url: https://github.com/PoulinV/AxiCLASS.git
+    pinned_ref_kind: commit
+    pinned_ref: ba4ede7b1d735aa6312ab5f4355d26b5e617e70c
+    pinned_ref_verified_at: "2026-06-14"
+    required_ref_env: HT_AXICLASS_REF
+    required_for_probe: false
+  hyrec2:
+    family: recombination_history
+    repo_url: https://github.com/nanoomlee/HYREC-2.git
+    pinned_ref_kind: commit
+    pinned_ref: 09e8243d0e08edd3603a94dfbc445ae06cafe139
+    pinned_ref_verified_at: "2026-06-14"
+    required_ref_env: HT_HYREC2_REF
+    required_for_probe: true
+posterior:
+  default_sampler: cobaya
+  fallback_sampler: montepython
+  l7_attempt_hours: 12
+  l7_total_candidate_hours: 48
+  timeout_status: inconclusive_posterior
+  missing_likelihood_status: missing_likelihoods

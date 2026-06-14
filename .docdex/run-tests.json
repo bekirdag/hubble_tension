@@ -1,0 +1,4 @@
+{
+  "command": ".venv/bin/python",
+  "args": ["-m", "pytest"]
+}
